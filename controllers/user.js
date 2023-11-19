@@ -13,6 +13,7 @@ async function handleUserSignUp(req, res) {
     res.redirect('/');
 }
 async function handleUserLogIn(req, res) {
+    console.log('hi im in login')
     const { email, password } = req.body;
     const user = await User.findOne({ email, password });
     if (!user) {
@@ -21,7 +22,8 @@ async function handleUserLogIn(req, res) {
         })
     }
     const token = setUser(user);
-    res.cookie("uuid", token);
-    res.redirect('/');
+    //res.cookie("uuid", token);
+    //res.redirect('/');
+    return res.json({ token: token })
 }
 module.exports = { handleUserSignUp, handleUserLogIn }
